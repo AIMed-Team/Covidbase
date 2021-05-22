@@ -2,7 +2,7 @@ version: '3.3'
 services:
   backend:
     container_name: paper-reg-backend
-    image: paper-reg/backend:$BACKEND_IMAGE_VERSION
+    image: aimedsut/paper-reg-backend:$BACKEND_IMAGE_VERSION
     build: ./backend/
     depends_on:
       - database
