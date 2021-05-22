@@ -136,8 +136,14 @@ JET_SIDE_MENU_COMPACT = True
 JET_SIDE_MENU_CUSTOM_APPS = [
     ('api', [
         'Dataset',
+        'Paper',
+        'Metric',
     ]),
 ]
 JET_CHANGE_FORM_SIBLING_LINKS = False
 JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.Dashboard'
 
+
+X_FRAME_OPTIONS = 'ALLOWALL'
+
+XS_SHARING_ALLOWED_METHODS = ['POST','GET','OPTIONS', 'PUT', 'DELETE']
