@@ -21,6 +21,9 @@ class Dataset(models.Model):
     name = models.CharField(max_length=100)
     url = models.URLField(blank=False, null=False, max_length=256)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class JournalReferenceType(EnumField):
     DOI = 'DOI'
@@ -34,6 +37,9 @@ class Paper(models.Model):
                                               choices=JournalReferenceType.choices())
     journal_reference_id = models.CharField(max_length=128, null=False)
 
+    def __str__(self) -> str:
+        return f'{self.title} - {self.journal_reference_type}: {self.journal_reference_id}'
+
 
 class Metric(models.Model):
     name = models.CharField(max_length=128)
@@ -43,3 +49,6 @@ class Metric(models.Model):
         Paper, related_name='metrics', on_delete=models.CASCADE)
     dataset = models.ForeignKey(
         Dataset, related_name='metrics', on_delete=models.RESTRICT)
+
+    def __str__(self) -> str:
+        return f'{self.paper} {self.name} metric on {self.dataset} dataset: {self.value} {self.unit}'
