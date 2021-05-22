@@ -3,6 +3,7 @@ name: "Build Workflow"
 env:
   DOCKER_USERNAME: aimedsut
   RELEASE_VERSION: 0.0.1 # If changed, make sure to also update this variable in deploy workflow.
+  DOCKER_REPO: paper-reg-backend
 on:
   push:
     branches:
@@ -32,6 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./.github/scripts/release-image.sh
+          --docker-repo $DOCKER_REPO
           --service-name backend
           --src-tag snapshot-$GITHUB_RUN_ID
           --release-tag $RELEASE_VERSION

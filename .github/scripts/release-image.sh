@@ -7,6 +7,7 @@ SRC_TAG=
 RELEASE_TAG=
 DOCKER_USER=
 DOCKER_PASS=
+DOCKER_REPO=
 
 FULL_SRC_TAG=
 FULL_RELEASE_TAG=
@@ -55,6 +56,11 @@ function inflate_options() {
       DOCKER_PASS="$1"
       shift
       ;;
+    --docker-repo)
+      shift
+      DOCKER_REPO="$1"
+      shift
+      ;;
     *)
       echo "Unknown option: $1"
       exit 2
@@ -62,9 +68,9 @@ function inflate_options() {
     esac
   done
 
-  FULL_SRC_TAG="$DOCKER_USER/$SERVICE_NAME:$SRC_TAG"
-  FULL_RELEASE_TAG="$DOCKER_USER/$SERVICE_NAME:$RELEASE_TAG"
-  FULL_LATEST_TAG="$DOCKER_USER/$SERVICE_NAME:latest"
+  FULL_SRC_TAG="$DOCKER_USER/$DOCKER_REPO:$SRC_TAG"
+  FULL_RELEASE_TAG="$DOCKER_USER/$DOCKER_REPO:$RELEASE_TAG"
+  FULL_LATEST_TAG="$DOCKER_USER/$DOCKER_REPO:latest"
 }
 
 function check_options() {
