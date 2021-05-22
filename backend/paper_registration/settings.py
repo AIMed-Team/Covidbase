@@ -80,8 +80,12 @@ WSGI_APPLICATION = 'paper_registration.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('MYSQL_DATABASE'),
+        'USER': 'root',
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': 'database',
+        'PORT': 3306,
     }
 }
 
