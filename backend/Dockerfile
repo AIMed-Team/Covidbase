@@ -6,6 +6,7 @@ RUN chmod +x ./wait
 COPY requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 COPY . ./
+RUN SECRET_KEY=dummy python manage.py collectstatic
 RUN chmod +x ./run.sh ./wait_for_db_service.sh
 
 CMD ./run.sh
