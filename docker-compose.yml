@@ -9,6 +9,9 @@ services:
     environment:
       - DB_PASSWORD=$MYSQL_ROOT_PASSWORD
       - SECRET_KEY
+      - ADMIN_USERNAME
+      - ADMIN_EMAIL
+      - ADMIN_PASSWORD
   database:
     image: mysql:latest
     container_name: paper-reg-mysql

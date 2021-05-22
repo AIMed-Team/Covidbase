@@ -32,6 +32,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 # Application definition
 
 INSTALLED_APPS = [
+    'jet.dashboard',
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -122,3 +124,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+# Jet admin settings
+
+JET_SIDE_MENU_COMPACT = True
+JET_SIDE_MENU_CUSTOM_APPS = [
+    ('api', [
+        'Dataset',
+    ]),
+]
+JET_CHANGE_FORM_SIBLING_LINKS = False
+JET_INDEX_DASHBOARD = 'jet.dashboard.dashboard.Dashboard'
+

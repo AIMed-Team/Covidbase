@@ -6,6 +6,10 @@ readonly CWD=$(dirname "$0")
 main() {
   "$CWD/wait_for_db_service.sh"
   "$CWD"/manage.py migrate
+  "$CWD"/manage.py ensure_adminuser --username="$ADMIN_USERNAME" \
+    --email="$ADMIN_EMAIL" \
+    --password="$ADMIN_PASSWORD"
+
   gunicorn --bind :8000 --workers 16 paper_registration.wsgi:application
 }
 
