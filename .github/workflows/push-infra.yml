@@ -22,7 +22,7 @@ jobs:
           --privileged
           --name infra_container
           rastasheep/ubuntu-sshd:18.04
-      - name: Run setup_infra.yml
+      - name: Run setup-infra.yml
         run: docker run
           --network covidbase-net
           -v `pwd`:/app-src/:ro
@@ -40,7 +40,7 @@ jobs:
           ansible_user=root
           ansible_ssh_pass=root
           docker_hub_password=${{ secrets.DOCKER_PASSWORD }}"
-          setup_infra.yml'
+          setup-infra.yml'
       - run: docker stop infra_container
       - run: docker commit infra_container $DOCKER_USERNAME/covidbase-infra-image:latest
       - run: echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u $DOCKER_USERNAME --password-stdin
