@@ -31,7 +31,7 @@ jobs:
           secret_key=${{ secrets.SECRET_KEY }}
           mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}
           docker_hub_password=${{ secrets.DOCKER_PASSWORD }}
-          admin_username=${{ ADMIN_USERNAME }}
-          admin_email=${{ ADMIN_EMAIL }}
-          admin_password=${{ ADMIN_PASSWORD }}"
+          admin_username=${{ secrets.ADMIN_USERNAME }}
+          admin_email=${{ secrets.ADMIN_EMAIL }}
+          admin_password=${{ secrets.ADMIN_PASSWORD }}"
           deploy.yml
