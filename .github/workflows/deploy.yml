@@ -16,8 +16,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: create ssh key file
         run: echo "${{ secrets.SERVER_SSH_KEY }}" > ssh_privkey.pem
-      - name: chmod
-        run: chmod 700 ssh_privkey.pem
+
       - name: Deploy
         working-directory: ./deploy/
         run: ansible-playbook
