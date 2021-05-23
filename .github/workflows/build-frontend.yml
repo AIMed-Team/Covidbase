@@ -1,5 +1,5 @@
 ---
-name: "Build Workflow"
+name: "Build Frontend"
 env:
   DOCKER_USERNAME: aimedsut
   RELEASE_VERSION: 0.0.1 # If changed, make sure to also update this variable in deploy workflow.
@@ -8,32 +8,33 @@ on:
     branches:
       - master
 jobs:
-  build-backend:
+  build-frontend:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - run: ./.github/scripts/build.sh
-          --service-name backend
+          --service-name frontend
           --version snapshot-$GITHUB_RUN_ID
           --docker-user $DOCKER_USERNAME
           --docker-pass ${{ secrets.DOCKER_PASSWORD }}
-  smoke-test-backend:
-    needs: build-backend
+  smoke-test-frontend:
+    needs: build-frontend
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - run: ./.github/scripts/smoke-test.sh
+          --host https://localhost/api/
           --tag snapshot-$GITHUB_RUN_ID
           --docker-user $DOCKER_USERNAME
           --docker-pass ${{ secrets.DOCKER_PASSWORD }}
-  release-backend:
-    needs: smoke-test-backend
+  release-frontend:
+    needs: smoke-test-frontend
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - run: ./.github/scripts/release-image.sh
-          --docker-repo covidbase-backend
-          --service-name backend
+          --docker-repo covidbase-frontend
+          --service-name frontend
           --src-tag snapshot-$GITHUB_RUN_ID
           --release-tag $RELEASE_VERSION
           --docker-user $DOCKER_USERNAME

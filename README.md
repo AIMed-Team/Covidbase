@@ -1,4 +1,5 @@
 # Covidbase
 
-[![Build Workflow](https://github.com/AIMed-Team/Covidbase/actions/workflows/build.yml/badge.svg)](https://github.com/AIMed-Team/Covidbase/actions/workflows/build.yml)
+[![Build Backend](https://github.com/AIMed-Team/Covidbase/actions/workflows/build-backend.yml/badge.svg)](https://github.com/AIMed-Team/Covidbase/actions/workflows/build-backend.yml)
+[![Build Frontend](https://github.com/AIMed-Team/Covidbase/actions/workflows/build-frontend.yml/badge.svg)](https://github.com/AIMed-Team/Covidbase/actions/workflows/build-frontend.yml)
 [![Deploy](https://github.com/AIMed-Team/Covidbase/actions/workflows/deploy.yml/badge.svg)](https://github.com/AIMed-Team/Covidbase/actions/workflows/deploy.yml)

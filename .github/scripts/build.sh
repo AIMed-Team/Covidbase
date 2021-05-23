@@ -11,7 +11,7 @@ function main() {
   inflate_options "$@"
 
   # Set all versions to the given version, so that any of them if built is tagged by that version.
-  export BACKEND_IMAGE_VERSION=$VERSION
+  export IMAGE_VERSION=$VERSION
 
   echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
   docker-compose build $SERVICE_NAME
