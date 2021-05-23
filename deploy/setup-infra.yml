@@ -85,7 +85,7 @@
 
     # Ansible 'service' module didn't work after 1 week try!
     - name: Restart docker manually!
-      shell: "systemctl daemon-reload && service docker restart"
+      shell: "service docker restart"
 
     - name: Post check
       command: "{{ item }}"
