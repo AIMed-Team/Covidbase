@@ -1,0 +1,41 @@
+---
+name: "Build Backend"
+env:
+  DOCKER_USERNAME: aimedsut
+  RELEASE_VERSION: 0.0.1 # If changed, make sure to also update this variable in deploy workflow.
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-backend:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./.github/scripts/build.sh
+          --service-name backend
+          --version snapshot-$GITHUB_RUN_ID
+          --docker-user $DOCKER_USERNAME
+          --docker-pass ${{ secrets.DOCKER_PASSWORD }}
+  smoke-test-backend:
+    needs: build-backend
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./.github/scripts/smoke-test.sh
+          --host https://localhost/api/
+          --tag snapshot-$GITHUB_RUN_ID
+          --docker-user $DOCKER_USERNAME
+          --docker-pass ${{ secrets.DOCKER_PASSWORD }}
+  release-backend:
+    needs: smoke-test-backend
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - run: ./.github/scripts/release-image.sh
+          --docker-repo covidbase-backend
+          --service-name backend
+          --src-tag snapshot-$GITHUB_RUN_ID
+          --release-tag $RELEASE_VERSION
+          --docker-user $DOCKER_USERNAME
+          --docker-pass ${{ secrets.DOCKER_PASSWORD }}

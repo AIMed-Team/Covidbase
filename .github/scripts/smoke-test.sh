@@ -66,7 +66,7 @@ function check_options() {
 }
 
 function run_local_server_by_tag() {
-  export BACKEND_IMAGE_VERSION=$TAG
+  export IMAGE_VERSION=$TAG
   echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
   docker-compose pull
   docker-compose up -d --no-build

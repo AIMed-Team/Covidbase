@@ -7,7 +7,7 @@ env:
   HOST_SSH_USER: ubuntu
 on:
   workflow_run:
-    workflows: ["Build Workflow"]
+    workflows: ["Build Workflow", "Build Frontend"]
     branches: [master]
     types: 
       - completed
@@ -33,7 +33,7 @@ jobs:
           docker_username=$DOCKER_USERNAME
           ansible_host=$TARGET_HOST
           ansible_user=$HOST_SSH_USER
-          backend_image_version=$RELEASE_VERSION
+          image_version=$RELEASE_VERSION
           secret_key=${{ secrets.SECRET_KEY }}
           mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}
           docker_hub_password=${{ secrets.DOCKER_PASSWORD }}

@@ -10,7 +10,7 @@ main() {
     --email="$ADMIN_EMAIL" \
     --password="$ADMIN_PASSWORD"
 
-  gunicorn --bind :8000 --workers 16 covidbase.wsgi:application
+  gunicorn --bind :8000 --workers 2 covidbase.wsgi:application
 }
 
 main "$@"
