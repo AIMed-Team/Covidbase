@@ -1,0 +1,37 @@
+---
+name: "Deploy Latest Version"
+env:
+  DOCKER_USERNAME: aimedsut
+  RELEASE_VERSION: latest
+  TARGET_HOST: 77.237.77.206
+  HOST_SSH_USER: ubuntu
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    container:
+      image: spy86/ansible:latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: create ssh key file
+        run: echo ${{ secrets.SERVER_SSH_KEY }} > ssh_privkey.pem
+      - name: chmod
+        run: chmod 600 ssh_privkey.pem
+      - name: Deploy
+        working-directory: ./deploy/
+        run: ansible-playbook
+          -i inventory.yml
+          --extra-vars="
+          docker_username=$DOCKER_USERNAME
+          ansible_host=$TARGET_HOST
+          ansible_user=$HOST_SSH_USER
+          ansible_ssh_private_key_file=ssh_privkey.pem
+          backend_image_version=$RELEASE_VERSION
+          secret_key=${{ secrets.SECRET_KEY }}
+          mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}
+          docker_hub_password=${{ secrets.DOCKER_PASSWORD }}
+          admin_username=${{ ADMIN_USERNAME }}
+          admin_email=${{ ADMIN_EMAIL }}
+          admin_password=${{ ADMIN_PASSWORD }}"
+          deploy.yml

@@ -1,0 +1,15 @@
+---
+all:
+  vars:
+    src_root_dir: '../'
+    dest_root_dir: '/home/{{ ansible_user }}/covidbase/'
+    dest_ssl_privkey_path: '{{ dest_root_dir }}/privkey.pem'
+    dest_ssl_fullchain_path: '{{ dest_root_dir }}/fullchain.pem'
+    docker_hub_username: '{{ docker_username }}'
+    src_nginx_conf_path: '{{ src_root_dir }}/nginx.conf'
+  children:
+    production:
+      hosts:
+        prod1:
+          ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+          ansible_ssh_private_key_file: '{{ ansible_ssh_private_key_file }}'
