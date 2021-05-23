@@ -1,5 +1,5 @@
 """
-ASGI config for paper_registration project.
+ASGI config for covidbase project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'paper_registration.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'covidbase.settings')
 
 application = get_asgi_application()

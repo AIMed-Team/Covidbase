@@ -3,7 +3,7 @@ name: "Build Workflow"
 env:
   DOCKER_USERNAME: aimedsut
   RELEASE_VERSION: 0.0.1 # If changed, make sure to also update this variable in deploy workflow.
-  DOCKER_REPO: paper-reg-backend
+  DOCKER_REPO: covidbase-backend
 on:
   push:
     branches:
