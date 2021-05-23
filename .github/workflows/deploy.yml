@@ -1,11 +1,10 @@
 ---
-name: "Deploy Latest Version"
+name: "Deploy"
 env:
   DOCKER_USERNAME: aimedsut
   RELEASE_VERSION: latest
   TARGET_HOST: 77.237.77.206
   HOST_SSH_USER: ubuntu
-name: Release
 on:
   workflow_run:
     workflows: ["Build Workflow"]
@@ -21,11 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: webfactory/ssh-agent@v0.5.2
+      - name: Add SSH private key
+        uses: webfactory/ssh-agent@v0.5.2
         with:
           ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
-      - name: Deploy
+      - name: Deploy using ansible
         working-directory: ./deploy/
         run: ansible-playbook
           -i inventory.yml
