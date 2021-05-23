@@ -55,7 +55,7 @@ jobs:
           --network covidbase-net
           --ip $TARGET_HOST
           --privileged
-          $DOCKER_USERNAME/infra-image:latest
+          $DOCKER_USERNAME/covidbase-infra-image:latest
       - run: docker run
           --network covidbase-net
           --env TARGET_HOST=$TARGET_HOST
