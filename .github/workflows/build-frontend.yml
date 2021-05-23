@@ -23,7 +23,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: ./.github/scripts/smoke-test.sh
-          --host https://localhost/api/
+          --host https://localhost/
           --tag snapshot-$GITHUB_RUN_ID
           --docker-user $DOCKER_USERNAME
           --docker-pass ${{ secrets.DOCKER_PASSWORD }}

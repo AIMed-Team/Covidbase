@@ -6,8 +6,8 @@ class App extends Component {
     datasets: []
   }
 
-  componentDidMount() {
-    fetch('https://localhost/api/dataset')
+  async componentDidMount() {
+    fetch('/api/dataset')
       .then(res => res.json())
       .then((data) => {
         this.setState({ datasets: data })
