@@ -14,11 +14,10 @@ jobs:
       image: spy86/ansible:latest
     steps:
       - uses: actions/checkout@v2
-      - name: create ssh key file
-        run: echo "${{ secrets.SERVER_SSH_KEY }}" > ssh_privkey.pem
 
-      - name: ssh add
-        run: ssh-agent bash && ssh-add ssh_privkey.pem
+      - uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.SERVER_SSH_KEY }}
 
       - name: Deploy
         working-directory: ./deploy/
