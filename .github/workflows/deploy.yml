@@ -17,6 +17,9 @@ jobs:
       - name: create ssh key file
         run: echo "${{ secrets.SERVER_SSH_KEY }}" > ssh_privkey.pem
 
+      - name: ssh add
+        run: ssh-add ssh_privkey.pem
+
       - name: Deploy
         working-directory: ./deploy/
         run: ansible-playbook
@@ -25,7 +28,6 @@ jobs:
           docker_username=$DOCKER_USERNAME
           ansible_host=$TARGET_HOST
           ansible_user=$HOST_SSH_USER
-          ansible_ssh_private_key_file=ssh_privkey.pem
           backend_image_version=$RELEASE_VERSION
           secret_key=${{ secrets.SECRET_KEY }}
           mysql_root_password=${{ secrets.MYSQL_ROOT_PASSWORD }}
