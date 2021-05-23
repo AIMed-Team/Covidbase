@@ -18,7 +18,7 @@ jobs:
         run: echo "${{ secrets.SERVER_SSH_KEY }}" > ssh_privkey.pem
 
       - name: ssh add
-        run: ssh-add ssh_privkey.pem
+        run: ssh-agent bash && ssh-add ssh_privkey.pem
 
       - name: Deploy
         working-directory: ./deploy/
