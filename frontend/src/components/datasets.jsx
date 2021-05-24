@@ -13,7 +13,7 @@ const Datasets = () => {
     // Using useEffect to call the API once mounted and set the data
     useEffect(() => {
         (async () => {
-            const result = await axios("https://localhost/api/dataset");
+            const result = await axios("/api/dataset");
             setDatasets(result.data);
         })();
     }, []);
