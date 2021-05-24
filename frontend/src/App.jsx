@@ -1,28 +1,18 @@
-import React, { Component } from 'react'
-import Dataset from './components/dataset'
+import React from 'react'
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
+import Dataset from './components/datasets'
 
-class App extends Component {
-  state = {
-    datasets: []
-  }
-
-  async componentDidMount() {
-    fetch('/api/dataset')
-      .then(res => res.json())
-      .then((data) => {
-        this.setState({ datasets: data })
-      })
-      .catch(console.log)
-  }
-
-  render() {
+const App = () => {
     return (
-      <div>
-        <center><h1>Dataset List</h1></center>
-        {this.state.datasets.map((dataset) => <Dataset dataset={dataset}></Dataset>)}
-      </div>
+        <BrowserRouter>
+            <Switch>
+                <Route exact path='/'>
+                    <Redirect to='/datasets/' />
+                </Route>
+                <Route path='/datasets/' component={Dataset} />
+            </Switch>
+        </BrowserRouter>
     );
-  }
-}
+};
 
 export default App;
