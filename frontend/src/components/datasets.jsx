@@ -22,10 +22,16 @@ const Datasets = () => {
 
     const columns = useMemo(
         () => [
-            { field: 'id', headerName: 'Id', width: 100 },
+            {
+                field: 'id',
+                headerName: 'Id',
+                align: 'center',
+                width: 100,
+            },
             {
                 field: 'name',
                 headerName: 'Name',
+                align: 'center',
                 width: 130,
                 renderCell: ({ row }) => (
                     row.url ? <a href={row.url}>{row.name}</a> : row.name
