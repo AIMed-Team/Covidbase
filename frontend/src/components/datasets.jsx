@@ -2,9 +2,7 @@ import React, { useState, useEffect, useMemo, Fragment } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { DataGrid } from '@material-ui/data-grid';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
+import { CssBaseline, Typography, Container, Link } from '@material-ui/core';
 import Header from './header';
 import Config from '../config';
 import { sleep } from '../utils';
@@ -46,7 +44,7 @@ const Datasets = () => {
                 align: 'center',
                 width: 130,
                 renderCell: ({ row }) => (
-                    row.url ? <a href={row.url}>{row.name}</a> : row.name
+                    row.url ? <Link href={row.url}>{row.name}</Link> : row.name
                 ),
             },
         ], []
@@ -56,10 +54,11 @@ const Datasets = () => {
         <Fragment>
             <Header />
             <CssBaseline />
-            <Container maxWidth="lg">
-                <Typography component="div" style={{ height: '50vh' }}>
-                    <DataGrid columns={columns} rows={datasets} pageSize={10} />
+            <Container maxWidth="lg" className="bg-white shadow" style={{ padding: 25 }}>
+                <Typography variant='h2' gutterBottom>
+                    Datasets List
                 </Typography>
+                <DataGrid className="bg-light" columns={columns} rows={datasets} pageSize={10} autoHeight />
             </Container>
         </Fragment>
     )
