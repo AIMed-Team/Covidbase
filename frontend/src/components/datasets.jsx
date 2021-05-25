@@ -1,10 +1,13 @@
 import React, { useState, useEffect, useMemo, Fragment } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import { DataGrid } from '@material-ui/data-grid';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Header from './header';
+import Config from '../config';
+import { sleep } from '../utils';
 
 const Datasets = () => {
 
@@ -13,8 +16,17 @@ const Datasets = () => {
     // Using useEffect to call the API once mounted and set the data
     useEffect(() => {
         (async () => {
-            const result = await axios("/api/dataset");
-            setDatasets(result.data);
+            while (true) {
+                try {
+                    const result = await axios(`${Config.ApiBaseUrl}api/dataset/`);
+                    setDatasets(result.data);
+                    break;
+                } catch (error) {
+                    toast.error(error.message);
+                    await sleep(10000);
+                    toast.info('Retrying...');
+                }
+            }
         })();
     }, []);
 
