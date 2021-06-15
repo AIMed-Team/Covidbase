@@ -30,8 +30,6 @@ services:
       - MYSQL_DATABASE
     volumes:
       - ./db-data:/var/lib/mysql
-    ports: 
-      - 3306:3306
     tty: true
   nginx:
     container_name: covidbase-nginx
